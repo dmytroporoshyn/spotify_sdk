@@ -35,7 +35,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfig "auto"
+        namespace "com.spotify.app-remote"
     }
     lintOptions {
         disable 'InvalidPackage'

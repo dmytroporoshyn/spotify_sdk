@@ -8,8 +8,6 @@
 #import "spotify_sdk-Swift.h"
 #endif
 
-#import <SpotifyiOS/SpotifyiOS.h>
-
 @implementation SpotifySdkPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   [SwiftSpotifySdkPlugin registerWithRegistrar:registrar];

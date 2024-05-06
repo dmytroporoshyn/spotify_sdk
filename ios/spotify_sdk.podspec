@@ -21,6 +21,6 @@ Unofficial Spotify Flutter SDK.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
   s.swift_version = '5.0'
   s.prepare_command = './prepare-iOS-SDK.sh'
-  s.vendored_frameworks = 'ios-sdk/SpotifyiOS.xcframework'
-  s.preserve_paths = 'ios-sdk/SpotifyiOS.xcframework'
+  s.vendored_frameworks = 'ios-auth/SpotifyLogin.xcframework'
+  s.preserve_paths = 'ios-auth/SpotifyLogin.xcframework'
   end

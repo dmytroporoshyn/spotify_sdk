@@ -174,7 +174,6 @@ class SpotifySdkPlugin : MethodCallHandler, FlutterPlugin, ActivityAware, Plugin
             spotifyImagesApi = SpotifyImagesApi(spotifyAppRemote, result)
             spotifyConnectApi = SpotifyConnectApi(spotifyAppRemote, result)
         }
-
         when (call.method) {
             //connecting to spotify
             methodConnectToSpotify -> connectToSpotify(call.argument(paramClientId), call.argument(paramRedirectUrl), result)
@@ -329,7 +328,6 @@ class SpotifySdkPlugin : MethodCallHandler, FlutterPlugin, ActivityAware, Plugin
         if (applicationActivity == null) {
             throw IllegalStateException("getAccessToken needs a foreground activity")
         }
-
         if (clientId.isNullOrBlank() || redirectUrl.isNullOrBlank()) {
             result.error(errorConnecting, "client id or redirectUrl are not set or have invalid format", "")
         } else {
@@ -337,7 +335,7 @@ class SpotifySdkPlugin : MethodCallHandler, FlutterPlugin, ActivityAware, Plugin
             val scopeArray = scope?.split(",")?.toTypedArray()
             methodConnectToSpotify.checkAndSetPendingOperation(result)
 
-            val builder = AuthorizationRequest.Builder(clientId, AuthorizationResponse.Type.TOKEN, redirectUrl)
+            val builder = AuthorizationRequest.Builder(clientId, AuthorizationResponse.Type.CODE, redirectUrl)
             builder.setScopes(scopeArray)
             val request = builder.build()
 
@@ -380,6 +378,9 @@ class SpotifySdkPlugin : MethodCallHandler, FlutterPlugin, ActivityAware, Plugin
         pendingOperation = null
 
         when (response.type) {
+            AuthorizationResponse.Type.CODE -> {
+                result.success(response.code)
+            }
             AuthorizationResponse.Type.TOKEN -> {
                 result.success(response.accessToken)
             }
